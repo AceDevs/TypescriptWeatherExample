@@ -1,9 +1,16 @@
-// Style import
 import './styles/main.scss';
 
-// Import the API request method
+import { getWeather } from './networking/weather';
 import { buttonClick, getCity, updateInteface } from './dom-manipulation/domManipulation';
 
-// Add an event listener to the button
+export const displayWeather = async () => {
+    const city = getCity();
+    if(city) {
+        const weather = await getWeather(city);
+        updateInteface(weather);
+    }
+}
 
-// Create an async function to call the API method
+if(buttonClick) buttonClick.onclick = displayWeather;
+
+// Add logic to get your city as default for initial testing.
